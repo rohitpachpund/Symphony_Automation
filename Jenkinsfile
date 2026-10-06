@@ -1,5 +1,4 @@
 pipeline {
-    agent any
 
     stages {
 
@@ -33,6 +32,14 @@ pipeline {
             steps {
                 sh 'xvfb-run -a .venv/bin/python -m pytest --alluredir=allure-results'
             }
+        }
+    }
+
+    post {
+        always {
+            allure([
+                results: [[path: 'allure-results']]
+            ])
         }
     }
 }
