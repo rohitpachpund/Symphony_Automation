@@ -25,7 +25,7 @@ pipeline {
 
         stage('Install Playwright Browser') {
             steps {
-                sh '.venv/bin/python -m playwright install chromium'
+                sh '.venv/bin/python -m playwright install --with-deps chromium'
             }
         }
 
