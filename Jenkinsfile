@@ -31,7 +31,7 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                sh 'xvfb-run -a .venv/bin/python -m pytest'
+                sh 'xvfb-run -a .venv/bin/python -m pytest --alluredir=allure-results'
             }
         }
     }
