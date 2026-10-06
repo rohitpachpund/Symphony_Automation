@@ -25,13 +25,13 @@ pipeline {
 
         stage('Install Playwright Browser') {
             steps {
-                sh '.venv/bin/python -m playwright install --with-deps chromium'
+                sh '.venv/bin/python -m playwright install chromium'
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh '.venv/bin/python -m pytest'
+                sh 'xvfb-run -a .venv/bin/python -m pytest'
             }
         }
     }
