@@ -196,6 +196,7 @@ def test_invalid_product_search(page):
 
 
 
+@pytest.mark.smoke
 def test_tracking_redirection(page):
 
     page.goto("https://shop.symphonylimited.com/")
@@ -209,6 +210,7 @@ def test_tracking_redirection(page):
     )
 
 
+@pytest.mark.smoke
 def test_account_popup(page):
 
     page.goto("https://shop.symphonylimited.com/")

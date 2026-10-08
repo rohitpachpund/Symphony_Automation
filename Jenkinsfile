@@ -30,13 +30,18 @@ pipeline {
             }
         }
 
+        
         stage('Run Tests') {
-            steps {
-                sh 'xvfb-run -a .venv/bin/python -m pytest --alluredir=allure-results'
-            }
-        }
+    steps {
+        sh '''
+            if [ "$TEST_TYPE" = "SMOKE" ]; then
+                xvfb-run -a .venv/bin/python -m pytest -m smoke --alluredir=allure-results
+            elif [ "$TEST_TYPE" = "REGRESSION" ]; then
+                xvfb-run -a .venv/bin/python -m pytest --alluredir=allure-results
+            fi
+        '''
     }
-
+}
     post {
         always {
             allure([
