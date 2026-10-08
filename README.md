@@ -38,3 +38,5 @@ Symphony_Automation/
 
 
 Git practice started.
+
+Search functionality automation started.
