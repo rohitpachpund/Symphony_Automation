@@ -205,7 +205,7 @@ def test_tracking_redirection(page):
     tracking_page = header.tracking_opened()
 
     expect(tracking_page).to_have_url(
-        "https://symphonyd2c.clickpost.ai/en"
+        "https://symphonyd2c.clickpost.ai/"
     )
 
 
