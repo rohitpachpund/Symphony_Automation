@@ -30,23 +30,33 @@ pipeline {
             }
         }
 
-        
         stage('Run Tests') {
-    steps {
-        sh '''
-            if [ "$TEST_TYPE" = "SMOKE" ]; then
-                xvfb-run -a .venv/bin/python -m pytest -m smoke --alluredir=allure-results
-            elif [ "$TEST_TYPE" = "REGRESSION" ]; then
-                xvfb-run -a .venv/bin/python -m pytest --alluredir=allure-results
-            fi
-        '''
+            steps {
+                script {
+
+                    if (params.TEST_TYPE == 'SMOKE') {
+
+                        sh 'xvfb-run -a .venv/bin/python -m pytest -m smoke --alluredir=allure-results'
+
+                    } else if (params.TEST_TYPE == 'REGRESSION') {
+
+                        sh 'xvfb-run -a .venv/bin/python -m pytest --alluredir=allure-results'
+
+                    }
+
+                }
+            }
+        }
     }
-}
+
     post {
+
         always {
+
             allure([
                 results: [[path: 'allure-results']]
             ])
+
         }
     }
 }
